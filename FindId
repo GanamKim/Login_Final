@@ -1,0 +1,103 @@
+public class FindId extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textname;
+	private JTextField textbirth;
+	
+	public FindId() {
+		setTitle("ID 찾기");
+		setBounds(100,100,482,162);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5,5,5,5));
+		contentPane.setBackground(Color.WHITE);
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblId = new JLabel("닉네임");
+		lblId.setBounds(30,20,57,15);
+		contentPane.add(lblId);
+		
+		JLabel lblBirth = new JLabel("생년월일");
+		lblBirth.setBounds(30,43,57,15);
+		contentPane.add(lblBirth);
+		
+		JLabel lblExplain = new JLabel("생년월일 여덟자리를 입력해주세요.(예 : 19940820)");
+		lblExplain.setBounds(30,75,300,15);
+		lblExplain.setFont(lblExplain.getFont().deriveFont(14.0f));
+		contentPane.add(lblExplain);
+		
+		Border borderThin = BorderFactory.createLineBorder(new Color(116,1,113), 1);
+		
+		textname = new JTextField();
+		textname.setBounds(99,17,202,21);
+		textname.setBorder(borderThin);
+		contentPane.add(textname);
+		textname.setColumns(10);
+		
+		textbirth = new JTextField();
+		textbirth.setColumns(10);
+		textbirth.setBorder(borderThin);
+		textbirth.setBounds(99,40,202,21);
+		contentPane.add(textbirth);
+		
+		JLabel lblNewLabel_1 = new JLabel();
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(31,83,420,15);
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("아이디 찾기");
+		Border border = BorderFactory.createLineBorder(new Color(116,1,113), 2);
+		btnNewButton.setBorder(border);
+		btnNewButton.setBounds(313,17,136,44);
+		btnNewButton.setActionCommand("FindID");
+		btnNewButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//이곳에 버튼 눌렀을때 진행되는거 작성하기 
+				String sid = "";
+				if(textname.getText().equals("")|| textbirth.getText().equals("")) {
+					LoginMain.ShowMessage("이름과 생년월일을 입력해주세요.");
+					return;
+				}else
+					sid = FindIdValue(textname.getText(),textbirth.getText());
+				if(sid.equals("")) {
+					LoginMain.ShowMessage("해당하는 아이디가 존재하지 않습니다.");
+				}else {
+					StringBuffer strbuffer = new StringBuffer();
+					strbuffer.append(sid);
+					lblNewLabel_1.setText("고객님의 아이디는 "+IDOutput(strbuffer)+"입니다.");
+				}
+				
+			}
+			
+		});
+		contentPane.add(btnNewButton);
+	}
+	
+	private String FindIdValue(String sname, String sbirth) {
+		String sid="";
+		for(int i=0;i<Member.MemberVec.size();i++) {
+			if(Member.MemberVec.get(i).getName().equals(null))
+				continue;
+			if(Member.MemberVec.get(i).getBirth().equals(null))
+				continue;
+			if(Member.MemberVec.get(i).getName().equals(sname) &&
+					Member.MemberVec.get(i).getBirth().equals(sbirth)) {
+				sid = Member.MemberVec.get(i).getSid();
+			}
+		}
+		return sid;
+	}
+	
+	private StringBuffer IDOutput(StringBuffer sId) {
+		String str = "";
+		for(int i=0;i<(sId.length()-3);i++) {
+			str+="*";
+		}
+		if(sId.length()>=3)
+			return sId.replace(3, sId.length(), str);
+		return sId;
+	}
+	
+}
