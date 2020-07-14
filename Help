@@ -1,0 +1,83 @@
+package com.phoenix.choice;
+
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Help extends JFrame {
+	   
+	   public Help() {
+	   
+	   JFrame frame = new JFrame("Help"); 
+	   
+	   
+	   frame.setBounds(420,280,400,450);
+	   frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE); //현재 창만 닫기
+	   
+	   //폰트
+	   Font fHelpTitle = new Font("맑은 고딕", Font.BOLD, 15);
+	   Font fHelpLabel = new Font("맑은 고딕", Font.PLAIN, 12);
+	   
+	   frame.getContentPane().setBackground(Color.white);
+	   frame.setLayout(null);
+	   
+	   //타이틀
+	   JLabel lHelpTitle = new JLabel("ON n OFF에 오신 걸 환영합니다.");   
+	   lHelpTitle.setFont(fHelpTitle);
+	   lHelpTitle.setBounds(90, 30, 300, 50);
+	   
+
+		ImageIcon his = new ImageIcon("images/heart65.png");
+		ImageIcon rec = new ImageIcon("images/diary65.png");
+		ImageIcon com = new ImageIcon("images/bullentin-board65.png");
+		
+		
+	   //아이콘
+	   JLabel hisImg = new JLabel(his);
+	   JLabel recImg = new JLabel(rec);
+	   JLabel comImg = new JLabel(com);
+	   //설명
+	   JLabel lHelpHis = new JLabel();
+	   lHelpHis.setText("<html><body>선택한 날짜로 이동해 과거에 업로드한 사진, 메모를 확인 가능합니다.</body></html>"); //라벨 줄 바꿈 안되서 html사용
+	   lHelpHis.setFont(fHelpLabel);
+	   
+	   JLabel lHelpRec = new JLabel();
+	   lHelpRec.setText("<html><body>기록하고 싶은 사진, 메모 업로드 가능합니다.</body></html>"); 
+	   lHelpRec.setFont(fHelpLabel);
+	   
+	   JLabel lHelpCom = new JLabel();
+	   lHelpCom.setText("<html><body>다른 이용자들과 사진, 메모, 정보등을 공유할 수 있습니다.</body></html>"); 
+	   lHelpCom.setFont(fHelpLabel);
+	   
+	   
+	   
+	   frame.add(lHelpTitle);
+	   lHelpHis.setBounds(120,80,250,80);
+	   lHelpRec.setBounds(120,180,250,80);
+	   lHelpCom.setBounds(120,280,250,80);
+	   
+	   
+	   hisImg.setBounds(30,80,80,80);
+	   recImg.setBounds(25,180,80,80);
+	   comImg.setBounds(30,280,80,80);
+	   
+	   frame.add(lHelpHis);
+	   frame.add(lHelpRec);
+	   frame.add(lHelpCom);
+	   frame.add(hisImg);
+	   frame.add(recImg);
+	   frame.add(comImg);
+	   
+	   
+	   frame.setResizable(false);//창고정
+	   frame.setVisible(true);
+	   
+
+	   
+	   }
+	   
+	   
+	}
