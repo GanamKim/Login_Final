@@ -1,0 +1,78 @@
+public class Member {
+	
+	public static Vector<Member> MemberVec = new Vector<Member>(30);
+	
+	private String scustomernum;//고객번호 
+	private String sid;//아이디
+	private String spw;//비밀번호 
+	
+	private String sName;// 닉네임
+	private String sBirth;//생년월일
+	private String sInterest;//관심사 
+	
+	public Member() {}
+	
+	public Member(String sid, String spw) {
+		this.sid=sid;
+		this.spw=spw;
+	}
+	
+	public Member(String scustomernum, String sid, String spw, String sName, String sBirth,String sInterest) {
+		this.scustomernum=scustomernum;
+		this.sid=sid;
+		this.spw=spw;
+		this.sName=sName;
+		this.sBirth=sBirth;
+		this.sInterest=sInterest;
+	}
+	
+	public String getCustomernum() {
+		return this.scustomernum;
+	}
+	
+	public String getName() {
+		return this.sName;
+	}
+	
+	public String getBirth() {
+		return this.sBirth;
+	}
+	public String getInterest() {
+		return this.sInterest;
+	}
+	public String getSid() {
+		return this.sid;
+	}
+	public String getSpw() {
+		return this.spw;
+	}
+	
+	public void setSid(String sid) {
+		this.sid=sid;
+	}
+	public void setSpw(String spw) {
+		this.spw=spw;
+	}
+	
+  //이유 몰라요ㅠㅠ 처음부터 고개번호를 빼고 만들어져 있었음 
+	public void setMemberInfo(String sid, String spw, String sName, String sBirth,String sInterest) {
+		this.sid=sid;
+		this.spw=spw;
+		this.sName=sName;
+		this.sBirth=sBirth;
+		this.sInterest=sInterest;
+	}
+	
+  //얘는 이유는 모르지만 생년월일빼고 임
+	public ArrayList<String> ReturnList(){
+		ArrayList<String> arrayList = new ArrayList<String>();
+		arrayList.add("고객번호");
+		arrayList.add("닉네임");
+		arrayList.add("아이디");
+		arrayList.add("비밀번호");
+		arrayList.add("관심사");
+		return arrayList;
+	}
+	
+
+}
