@@ -1,0 +1,158 @@
+public class Login extends JFrame{
+	
+	JPanel contentPane;
+	JTextField txtId;
+	JPasswordField txtPw;
+	
+	String sID = "";
+	String sPW = "";
+	
+	public Login() {
+		
+		setTitle("나를 알아가는 시간, ON n OFF");
+		setBounds(100,100,1024,720);
+		setLayout(null);
+		
+		JPanel mainPan = new JPanel();
+		mainPan.setBounds(0,0,1024,720);
+		mainPan.setLayout(null);
+		
+		ImageIcon image = new ImageIcon("images/onandoff.png");
+		JLabel lblImage = new JLabel(image);
+		lblImage.setBounds(0,0,1024,720);
+		mainPan.add(lblImage);
+		
+		JPanel contentPane = new JPanel();
+		contentPane.setLayout(null);
+		contentPane.setBackground(new Color(255,255,255));
+		contentPane.setBounds(273,380,470,160);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setBounds(27,34,47,15);
+		contentPane.add(lblId);
+		
+		JTextField txtId = new JTextField();
+		txtId.setText("");
+		txtId.setBounds(60,27,167,25);
+		Border border = BorderFactory.createLineBorder(new Color(116,1,113), 2);
+		txtId.setBorder(border);
+		txtId.setColumns(10);
+		contentPane.add(txtId);
+		
+	
+		JLabel lblPw = new JLabel("PW");
+		lblPw.setBounds(27,64,47,15);
+		contentPane.add(lblPw);
+		
+		txtPw = new JPasswordField();
+		txtPw.setText("");
+		txtPw.setBounds(60,61,167,25);
+		txtPw.setBorder(border);
+		contentPane.add(txtPw);
+		txtPw.setColumns(10);
+		
+		JButton btnNewButton_Login = new JButton("로그인");
+		btnNewButton_Login.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//로그인 했을때 작업
+				boolean bLoginChk = false;
+				GetIdandPw(txtId,txtPw); //입력값 각각 넘겨주기 
+				LogIn_Chk loginchk = new LogIn_Chk();
+				bLoginChk = loginchk.LogInList_Chk(sID, sPW); //false면 로그인 실패
+				
+			if(!bLoginChk) {
+				JOptionPane.showMessageDialog(null, "아이디 또는 비밀번호를 확인 후 \n 다시 로그인해주세요.");
+			}else {
+				LoginMain.login.setVisible(false);
+				LoginMain.bLogInStatus = true;
+				//LoginMain.choicemain.Login();
+			}
+			dispose();
+			new MainView();
+			
+			//이곳에서 새로운 화면 구현 
+			}
+		});
+		btnNewButton_Login.setBorder(border);
+		btnNewButton_Login.setFocusPainted(false);
+		btnNewButton_Login.setBounds(244,27,99,54);
+		contentPane.add(btnNewButton_Login);
+		
+		
+		JButton btnNewButton_Sign = new JButton("회원가입");
+		btnNewButton_Sign.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				LoginMain.join.setVisible(true);
+			}
+		});
+		btnNewButton_Sign.setBorder(border);
+		btnNewButton_Sign.setFocusPainted(false);
+		btnNewButton_Sign.setBounds(245,99,99,30);
+		contentPane.add(btnNewButton_Sign);
+		
+		JButton button_FindID = new JButton("아이디 찾기");
+		button_FindID.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginMain.findId.setVisible(true);
+			}
+		});
+		button_FindID.setBorder(border);
+		button_FindID.setFocusPainted(false);
+		button_FindID.setBounds(24,99,102,30);
+		contentPane.add(button_FindID);
+		
+		
+		JButton button_Findpw = new JButton("PW찾기");
+		button_Findpw.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LoginMain.findpw.setVisible(true);
+			}
+		});
+		button_Findpw.setBorder(border);
+		button_Findpw.setFocusPainted(false);
+		button_Findpw.setBounds(136,99,99,30);
+		contentPane.add(button_Findpw);
+		
+		JButton button = new JButton("게스트 입장");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				LoginMain.login.setVisible(false);
+				new MainView();
+			}
+		});
+		button.setBorder(border);
+		button.setFocusPainted(false);
+		button.setBounds(358,26,102,84);
+		contentPane.add(button);
+		
+		Reset(txtId, txtPw);
+		
+		
+		
+		
+		add(mainPan);
+		add(contentPane);
+
+		add(mainPan);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setVisible(true);
+		
+	}
+	private void GetIdandPw(JTextField txtId, JTextField txtPw) {
+		sID = txtId.getText();
+		sPW = txtPw.getText();
+	}
+	private void Reset(JTextField txtId, JTextField txtPw) {
+		txtId.setText(null);
+		txtPw.setText(null);
+	}
+	
+	public static void main(String[] args) {
+		new Login();
+	}
+	
+
+}
